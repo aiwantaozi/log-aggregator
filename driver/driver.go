@@ -58,9 +58,7 @@ type Options struct {
 	PodUID        string `json:"kubernetes.io/pod.uid,omitempty" valid:"required"`
 }
 
-type FlexVolumeDriver struct {
-	Logger *logrus.Logger
-}
+type FlexVolumeDriver struct{}
 
 func (f *FlexVolumeDriver) Init() InitResponse {
 	if err := precreateDir(); err != nil {
@@ -108,13 +106,13 @@ func (f *FlexVolumeDriver) Init() InitResponse {
 
 func (f *FlexVolumeDriver) Mount(args []string) CommonResponse {
 	var err error
-	defer func(logger *logrus.Logger) {
+	defer func() {
 		if err != nil {
-			logger.Error(err)
+			logrus.Error(err)
 		}
-	}(f.Logger)
+	}()
 	// param check
-	f.Logger.Debugf("mount args: %v", args)
+	logrus.Debugf("mount args: %v", args)
 	if err = checkArgsLen(args, 2); err != nil {
 		return returnErrorResponse(err)
 	}
@@ -145,7 +143,7 @@ func (f *FlexVolumeDriver) Mount(args []string) CommonResponse {
 	} else {
 		hostDir = path.Join(svcLogBaseDir, identifyDir, customiseFormat, generateDir)
 		if err = generateCustomiseConfig(hostDir, opts); err != nil {
-			f.Logger.Error(err)
+			logrus.Error(err)
 			returnErrorResponse(err)
 		}
 	}
@@ -166,13 +164,13 @@ func (f *FlexVolumeDriver) Mount(args []string) CommonResponse {
 
 func (f *FlexVolumeDriver) Unmount(args []string) CommonResponse {
 	var err error
-	defer func(logger *logrus.Logger) {
+	defer func() {
 		if err != nil {
-			logger.Error(err)
+			logrus.Error(err)
 		}
-	}(f.Logger)
+	}()
 
-	f.Logger.Debugf("ummount args: %v", args)
+	logrus.Debugf("ummount args: %v", args)
 	if err = checkArgsLen(args, 1); err != nil {
 		return returnErrorResponse(err)
 	}
