@@ -24,15 +24,14 @@ if ($env:DRONE_TAG) {
     $TAG = $env:DRONE_TAG
 }
 
+$null = Copy-Item -Force -Path "$SRC_PATH\bin\log-aggregator.exe" -Destination .
+
 # Get release id as image tag suffix
 $HOST_RELEASE_ID = (Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\' -ErrorAction Ignore).ReleaseId
 $RELEASE_ID = $env:RELEASE_ID
 if (-not $RELEASE_ID) {
     $RELEASE_ID = $HOST_RELEASE_ID
 }
-
-Copy-Item -Path "../bin/log-aggregator" -Destination .
-
 $IMAGE = ('{0}/log-aggregator:{1}-windows-{2}' -f $REPO, $TAG, $RELEASE_ID)
 
 $ARCH = $env:ARCH
