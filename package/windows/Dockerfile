@@ -2,7 +2,7 @@ FROM mcr.microsoft.com/powershell:nanoserver-1809
 
 SHELL ["pwsh", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
-ENV LOG_AGGREGATOR_PATH C:\log-aggregator\bin
+ENV LOG_AGGREGATOR_PATH C:\\log-aggregator\\bin
 
 RUN New-Item -ItemType Directory -Path $Env:LOG_AGGREGATOR_PATH ;
 
