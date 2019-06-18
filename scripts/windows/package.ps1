@@ -5,7 +5,10 @@ Invoke-Expression -Command "$PSScriptRoot\version.ps1"
 
 $DIR_PATH = Split-Path -Parent $MyInvocation.MyCommand.Definition
 $SRC_PATH = (Resolve-Path "$DIR_PATH\..\..").Path
+$BIN_PATH = "$SRC_PATH\bin\log-aggregator.cmd"
 cd $SRC_PATH\package\windows
+
+$null = Copy-Item -Force -Path $BIN_PATH -Destination .
 
 $TAG = $env:TAG
 if (-not $TAG) {
@@ -23,8 +26,6 @@ if ($TAG | Select-String -Pattern 'dirty') {
 if ($env:DRONE_TAG) {
     $TAG = $env:DRONE_TAG
 }
-
-$null = Copy-Item -Force -Path "$SRC_PATH\bin\log-aggregator.exe" -Destination .
 
 # Get release id as image tag suffix
 $HOST_RELEASE_ID = (Get-ItemProperty 'HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\' -ErrorAction Ignore).ReleaseId
@@ -52,5 +53,4 @@ if ($RELEASE_ID -eq $HOST_RELEASE_ID) {
         -f Dockerfile .
 }
 
-# $IMAGE | Out-File -Encoding ascii -Force -FilePath "$SRC_PATH\dist\images"
 Write-Host "Built $IMAGE`n"
