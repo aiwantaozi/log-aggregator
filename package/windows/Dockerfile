@@ -10,7 +10,7 @@ COPY deploy.ps1 $Env:LOG_AGGREGATOR_PATH/.
 
 COPY log-aggregator.exe $Env:LOG_AGGREGATOR_PATH/.
 
-WORKDIR $LOG_AGGREGATOR_PATH
+# WORKDIR $LOG_AGGREGATOR_PATH
 
 # ENTRYPOINT ["C:\\log-aggregator\\bin\\deploy.ps1"]
 
