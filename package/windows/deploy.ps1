@@ -15,11 +15,11 @@ Write-Host "Starting log-aggregator"
 
 $VENDOR="cattle.io"
 $DRIVER="log-aggregator"
-$DRIVER_BIN="log-aggregator.exe"
+$DRIVER_BIN="log-aggregator.cmd"
 
 # Assuming the single driver file is located at /$DRIVER inside the DaemonSet image.
 
-$driver_dir="$VENDOR${VENDOR}~${DRIVER}"
+$driver_dir="$VENDOR${VENDOR}~${DRIVER_BIN}"
 
 Write-Host "driver_dir is $driver_dir"
 

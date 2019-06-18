@@ -8,10 +8,8 @@ RUN New-Item -ItemType Directory -Path $Env:LOG_AGGREGATOR_PATH ;
 
 COPY deploy.ps1 ${LOG_AGGREGATOR_PATH}\\deploy.ps1
 
-COPY log-aggregator.exe ${LOG_AGGREGATOR_PATH}\\log-aggregator.exe
+COPY log-aggregator.cmd ${LOG_AGGREGATOR_PATH}\\log-aggregator.cmd
 
 WORKDIR $LOG_AGGREGATOR_PATH
-
-# ENTRYPOINT ["C:\\log-aggregator\\bin\\deploy.ps1"]
 
 CMD ["pwsh", "-f", "deploy.ps1"]
