@@ -2,12 +2,14 @@ FROM mcr.microsoft.com/powershell:nanoserver-1809
 
 SHELL ["pwsh", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
 
-RUN New-Item -ItemType Directory -Path "C:\log-aggregator\bin";
+ENV LOG_AGGREGATOR_PATH C:\log-aggregator\bin
 
-COPY deploy.ps1 C:\log-aggregator\bin\deploy.ps1
+RUN New-Item -ItemType Directory -Path $Env:LOG_AGGREGATOR_PATH ;
 
-COPY log-aggregator.exe C:\log-aggregator\bin\log-aggregator.exe
+COPY deploy.ps1 $Env:LOG_AGGREGATOR_PATH\deploy.ps1
 
-WORKDIR C:\log-aggregator\bin
+COPY log-aggregator.exe $Env:LOG_AGGREGATOR_PATH\deploy.ps1\log-aggregator.exe
 
-ENTRYPOINT ["C:\\log-aggregator\\bin\\deploy.ps1"]
+WORKDIR $Env:LOG_AGGREGATOR_PATH
+
+ENTRYPOINT ["/deploy.ps1"]
