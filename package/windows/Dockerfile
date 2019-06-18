@@ -12,4 +12,6 @@ COPY log-aggregator.exe $Env:LOG_AGGREGATOR_PATH\deploy.ps1\log-aggregator.exe
 
 # WORKDIR $LOG_AGGREGATOR_PATH
 
-ENTRYPOINT ["C:\\log-aggregator\\bin\\deploy.ps1"]
+# ENTRYPOINT ["C:\\log-aggregator\\bin\\deploy.ps1"]
+
+CMD Start-Sleep 50000
