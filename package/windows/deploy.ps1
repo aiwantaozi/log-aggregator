@@ -28,8 +28,8 @@ if (!(Test-Path "/flexmnt/$driver_dir")) {
 }
 
 Copy-Item -Path "/$DRIVER/bin/$DRIVER_BIN" -Destination "/flexmnt/$driver_dir/.$DRIVER_BIN"
-Move-Item -Path "/flexmnt/$driver_dir/.$DRIVER_BIN" -Destination "/flexmnt/$driver_dir/$DRIVER_BIN"
+Move-Item -Force -Path "/flexmnt/$driver_dir/.$DRIVER_BIN" -Destination "/flexmnt/$driver_dir/$DRIVER_BIN"
 
 while ($true) {
-    Start-Sleep -Seconds 3600  
+    Start-Sleep -Seconds 3600
 }
