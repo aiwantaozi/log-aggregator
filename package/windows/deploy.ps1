@@ -13,13 +13,13 @@ $InformationPreference = 'SilentlyContinue'
 ## START main definition
 Write-Host "Starting log-aggregator"
 
-$VENDOR=cattle.io
-$DRIVER=log-aggregator
-$DRIVER_BIN=log-aggregator.exe
+$VENDOR="cattle.io"
+$DRIVER="log-aggregator"
+$DRIVER_BIN="log-aggregator.exe"
 
 # Assuming the single driver file is located at /$DRIVER inside the DaemonSet image.
 
-$driver_dir=$VENDOR${VENDOR:+"~"}${DRIVER}
+$driver_dir="$VENDOR${VENDOR}~${DRIVER}"
 
 Write-Host "driver_dir is $driver_dir"
 
