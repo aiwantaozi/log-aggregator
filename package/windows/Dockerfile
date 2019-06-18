@@ -6,11 +6,11 @@ ENV LOG_AGGREGATOR_PATH C:\log-aggregator\bin
 
 RUN New-Item -ItemType Directory -Path $Env:LOG_AGGREGATOR_PATH ;
 
-COPY deploy.ps1 $Env:LOG_AGGREGATOR_PATH/deploy.ps1
+COPY deploy.ps1 $Env:LOG_AGGREGATOR_PATH/.
 
-COPY log-aggregator.exe $Env:LOG_AGGREGATOR_PATH/log-aggregator.exe
+COPY log-aggregator.exe $Env:LOG_AGGREGATOR_PATH/.
 
-WORKDIR "$LOG_AGGREGATOR_PATH"
+WORKDIR $LOG_AGGREGATOR_PATH
 
 # ENTRYPOINT ["C:\\log-aggregator\\bin\\deploy.ps1"]
 
