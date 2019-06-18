@@ -14,4 +14,4 @@ WORKDIR $LOG_AGGREGATOR_PATH
 
 # ENTRYPOINT ["C:\\log-aggregator\\bin\\deploy.ps1"]
 
-CMD ["deploy.ps1"]
+CMD ["pwsh", "-f", "deploy.ps1"]
